@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUMIYH LOVE CALCULATER</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #ff6a88;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+        }
+
+        input {
+            width: 200px;
+        }
+
+        button {
+            background-color: #ff3366;
+            color: white;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: moveHeart 5s linear infinite;
+            opacity: 0.7;
+        }
+
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes moveHeart {
+            from {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 0.7;
+            }
+            to {
+                transform: translateY(-600px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DUMIYH LOVE CALCULATER</h1>
+        
+        <label for="name1">BOYFRIEND NAME</label><br>
+        <input type="text" id="name1" placeholder="BOYFRIEND NAME"><br>
+        
+        <label for="name2">GIRLFRIEND NAME</label><br>
+        <input type="text" id="name2" placeholder="GIRLFRIEND NAME"><br>
+        
+        <button onclick="calculateLove()">CALCULATE LOVE</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <div class="hearts" id="heartsContainer"></div>
+
+    <script>
+        function calculateLove() {
+            const name1 = document.getElementById("name1").value.trim();
+            const name2 = document.getElementById("name2").value.trim();
+            const resultDiv = document.getElementById("result");
+
+            if (!name1 || !name2) {
+                resultDiv.innerHTML = "Please enter both names!";
+                return;
+            }
+
+            const compatibility = Math.floor(Math.random() * 101); // Random percentage 0-100
+
+            resultDiv.innerHTML = `<h2>Your Love Compatibility is: ${compatibility}% 💖</h2>`;
+
+            if (compatibility > 80) {
+                resultDiv.innerHTML += "<p>You're a perfect match! ❤️</p>";
+            } else if (compatibility > 50) {
+                resultDiv.innerHTML += "<p>You have good compatibility! Keep it going! 💕</p>";
+            } else {
+                resultDiv.innerHTML += "<p>It might need some work, but love conquers all! 💔</p>";
+            }
+        }
+
+        // Generate heart animation
+        function createHeart() {
+            const heartContainer = document.getElementById("heartsContainer");
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.bottom = "-20px";
+            heart.style.width = `${10 + Math.random() * 20}px`;
+            heart.style.height = heart.style.width;
+            heart.style.animationDuration = `${3 + Math.random() * 3}s`;
+            heartContainer.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
